@@ -1,23 +1,27 @@
 
-def type_check(func):
+def type_check(type_num):
 
-    def wrapper(*args, **kwargs):
+    def decorator(func):
 
-        for arg in args:
+        def wrapper(*args, **kwargs):
 
-            if not isinstance(arg, int):
-                raise TypeError(f"Неверный тип аргумента {arg}. Ожидался <class 'int'>, получен {type(arg)}")
+            for arg in args:
 
-        for kwarg in kwargs:
+                if not isinstance(arg, type_num):
+                    raise TypeError(f"Неверный тип аргумента {arg}. Ожидался <class 'int'>, получен {type(arg)}")
 
-            if not isinstance(kwarg, int):
-                raise TypeError(f"Неверный тип аргумента {kwarg}. Ожидался <class 'int'>, получен {type(kwarg)}")
+            for kwarg in kwargs:
 
-        return func(*args, **kwargs)
+                if not isinstance(kwarg, type_num):
+                    raise TypeError(f"Неверный тип аргумента {kwarg}. Ожидался <class 'int'>, получен {type(kwarg)}")
 
-    return wrapper
+            return func(*args, **kwargs)
 
-@type_check
+        return wrapper
+
+    return decorator
+
+@type_check(int)
 def add(a, b):
     return a + b
 
