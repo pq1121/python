@@ -23,7 +23,7 @@ class MyArray:
 
 class MyThread(Thread):
 
-    def __init__(self, array:MyArray, label):
+    def __init__(self, array, label):
         super().__init__()
         self.__array = array
         self.__label = label
